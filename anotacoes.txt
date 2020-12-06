@@ -1,0 +1,16 @@
+https://www.vivaolinux.com.br/artigo/Store-Procedures-com-Transaction-no-MySQL
+https://www.slideshare.net/oxydron/banco-de-dados-2-controle-de-concorrncia
+
+Compartilho os pontos discutidos (caso tenha esquecido de alguma coisa, peço aos presentes que me lembrem):    
+
+• Estratégias que serão consideradas para inserção de arestas:
+    ◦ Uma aresta Ti → Tj (i ≠ j) é inserida no grafo de precedência para qualquer combinação de operações conflitantes em relação a um dado item, sendo que a operação de Tj acontece depois da de Ti na linha do tempo (inferido pela especificação do trabalho);
+    ◦ Uma aresta Ti → Tj (i ≠ j) é inserida no grafo de precedência somente para as combinações de operações conflitantes que são consecutivas em relação a um dado item, sendo que a operação de Tj acontece depois da de Ti na linha do tempo (inferido pela minha explicação);
+
+• Estratégias que serão consideradas para detecção de ciclo:
+    ◦ Um ciclo é identificado para qualquer combinação de arestas, mesmo que essas sejam referentes a itens de dados distintos (inferido pela especificação);
+    ◦ Um ciclo é identificado somente quando suas arestas envolvem o mesmo item de dados (inferido pela minha explicação e resposta à Thaís);
+
+• Caso o entendimento do grupo tenha sido diferente dos casos expostos, favor me procurar para que seja verificada se essa interpretação é válida;
+
+• A documentação do código deve indicar claramente as estratégias adotadas.

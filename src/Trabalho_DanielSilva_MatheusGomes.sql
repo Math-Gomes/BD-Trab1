@@ -42,35 +42,37 @@ BEGIN
     FROM
         arestas P JOIN arestas Q
         ON P.s = Q.t AND P.t = Q.s AND P.attr = Q.attr; -- Identifica ciclos de tamanho 2 que envolvam o mesmo atributo
+    
+    DROP TABLE IF EXISTS arestas;
 END;;
 
 DELIMITER ;
 
------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------
 -- Exemplo de chamada do procedure (Considerando que a tabela `Schedule` já existe)
 -- SET @resp = 1; 
 -- CALL `testeSerializabilidadePorConflito`(@resp);
 -- SELECT @resp;
 
----------------------------------- Exemplos ---------------------------------------
+-- -------------------------------- Exemplos ---------------------------------------
 
------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------
 -- Não é serializável por conflito (resp = 0) - Tempos 1, 2 e 4
--- DROP TABLE IF EXISTS `Schedule`;
--- CREATE TABLE `Schedule` (
---   `time` int(11) NOT NULL,
---   `#t`   int(11) NOT NULL,
---   `op`   char(1) NOT NULL,
---   `attr` char(1) NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
--- INSERT INTO `Schedule` (`time`, `#t`, `op`, `attr`) VALUES
--- (1,	1, 'R', 'A'),
--- (2,	2, 'W', 'A'),
--- (3,	3, 'R', 'A'),
--- (4,	1, 'W', 'A'),
--- (5,	1, 'C',  ''),
--- (7,	1, 'C',  '');
------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS `Schedule`;
+CREATE TABLE `Schedule` (
+  `time` int(11) NOT NULL,
+  `#t`   int(11) NOT NULL,
+  `op`   char(1) NOT NULL,
+  `attr` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `Schedule` (`time`, `#t`, `op`, `attr`) VALUES
+(1,	1, 'R', 'A'),
+(2,	2, 'W', 'A'),
+(3,	3, 'R', 'A'),
+(4,	1, 'W', 'A'),
+(5,	1, 'C',  ''),
+(7,	1, 'C',  '');
+-- ---------------------------------------------------------------------------------
 -- Serializável por conflito (resp = 1)
 -- DROP TABLE IF EXISTS `Schedule`;
 -- CREATE TABLE `Schedule` (
@@ -86,7 +88,7 @@ DELIMITER ;
 -- (4,  1,	'W', 'B'),
 -- (5,  1,	'C',  ''),
 -- (6,	 2,	'C',  '');
------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------
 -- Não é serializável por conflito (resp = 0) - Tempos 2, 3 e 5
 -- DROP TABLE IF EXISTS Schedule;
 -- CREATE TABLE Schedule (
@@ -106,7 +108,7 @@ DELIMITER ;
 -- (7, 1, 'C', ''),
 -- (8, 2, 'C', ''),
 -- (9, 3, 'C', '');
------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------
 -- Não é serializável por conflito (resp = 0) - Tempos 1, 2 e 3
 -- DROP TABLE IF EXISTS `Schedule`;
 -- CREATE TABLE `Schedule` (
@@ -123,7 +125,7 @@ DELIMITER ;
 -- (4, 2, 'R', 'X'),
 -- (5, 1, 'C', ''),
 -- (6, 2, 'C', '');
------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------
 -- Não é serializável por conflito (resp = 0) - Tempos 1, 7, 8
 -- DROP TABLE IF EXISTS `Schedule`;
 -- CREATE TABLE `Schedule` (
@@ -147,7 +149,7 @@ DELIMITER ;
 -- (11, 2, 'C', ''),
 -- (12, 3, 'C', ''),
 -- (13, 4, 'C', '');
------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------
 -- Serializável por conflito (resp = 1)
 -- DROP TABLE IF EXISTS `Schedule`;
 -- CREATE TABLE `Schedule` (
@@ -163,7 +165,7 @@ DELIMITER ;
 -- (3, 1, 'W', 'Y'),
 -- (4, 1, 'C', ''),
 -- (5, 2, 'C', '');
------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------
 -- Não é serializável por conflito (resp = 0) - Tempos (1, 2, 3) e (4, 5, 6)
 -- DROP TABLE IF EXISTS `Schedule`;
 -- CREATE TABLE `Schedule` (
@@ -181,4 +183,4 @@ DELIMITER ;
 -- (6,	3, 'R', 'B'),
 -- (7,	1, 'C',  ''),
 -- (8,	1, 'C',  '');
------------------------------------------------------------------------------------
+-- ---------------------------------------------------------------------------------
